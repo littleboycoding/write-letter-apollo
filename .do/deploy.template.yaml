@@ -8,11 +8,15 @@ spec:
      envs:
        - key: APOLLO_URL
          scope: BUILD_TIME
+         value: ${APP_URL}
+     catchall_document: index.html
  services:
    - name: write-letter-apollo
      git:
        branch: main
        repo_clone_url: https://github.com/littleboycoding/write-letter-apollo.git
+     routes:
+       - path: /apollo
      envs:
        - key: PORT
          value: "8000"
