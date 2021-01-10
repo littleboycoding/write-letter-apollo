@@ -3,7 +3,7 @@ Apollo implementation for Write Letter. See https://github.com/littleboycoding/w
 
 This was deployed on DigitalOcean, you can deploy to your own app platform with one click button below
 
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/littleboycoding/write-letter/tree/main)
+[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/littleboycoding/write-letter-apollo/tree/main)
 
 ## Environment Variables
 - PORT : *default to 8000*
