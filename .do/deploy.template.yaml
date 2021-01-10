@@ -1,18 +1,18 @@
 spec:
  name: write-letter
  static_sites:
-   - git:
-     branch: master
-     repo_clone_url: https://github.com/littleboycoding/write-letter.git
-     name: write-letter
+   - name: write-letter
+     git:
+       branch: master
+       repo_clone_url: https://github.com/littleboycoding/write-letter.git
      envs:
        - key: APOLLO_URL
          scope: BUILD_TIME
  services:
-   - name: web
+   - name: write-letter-apollo
      git:
-     branch: main
-     repo_clone_url: https://github.com/littleboycoding/write-letter-apollo.git
+       branch: main
+       repo_clone_url: https://github.com/littleboycoding/write-letter-apollo.git
      envs:
        - key: PORT
          value: "8000"
