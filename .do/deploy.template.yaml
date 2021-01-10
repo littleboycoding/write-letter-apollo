@@ -9,6 +9,6 @@ spec:
    - key: PORT
      value: 8000
    - key: NODE_ENV
-     value: production
+     value: "production"
    - key: MONGO_ADDRESS
      type: SECRET
