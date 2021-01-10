@@ -1,15 +1,5 @@
 spec:
- name: write-letter
- static_sites:
-   - name: write-letter
-     git:
-       branch: master
-       repo_clone_url: https://github.com/littleboycoding/write-letter.git
-     envs:
-       - key: APOLLO_URL
-         scope: BUILD_TIME
-         value: ${APP_URL}
-     catchall_document: index.html
+ name: write-letter-apollo
  services:
    - name: write-letter-apollo
      git:
