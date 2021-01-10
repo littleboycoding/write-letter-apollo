@@ -1,0 +1,14 @@
+spec:
+ name: write-letter
+ services:
+ - name: web
+   git:
+     branch: main
+     repo_clone_url: https://github.com/littleboycoding/write-letter-apollo.git
+   envs:
+   - key: PORT
+     value: 8000
+   - key: NODE_ENV
+     value: production
+   - key: MONGO_ADDRESS
+     type: SECRET
