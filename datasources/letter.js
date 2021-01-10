@@ -21,15 +21,23 @@ class Letter extends MongoDataSource {
   //   };
   // }
 
-  async getLetters(cursor, limit) {
+  async getLetters(cursor, limit, hashtag) {
+    console.log(hashtag);
     const letters = await (cursor
       ? this.collection
-          .find({ method: "post", _id: { $lt: ObjectId(cursor) } })
+          .find({
+            _id: { $lt: ObjectId(cursor) },
+            method: "post",
+            ...(hashtag && { hashtags: new RegExp(hashtag) }),
+          })
           .sort({ _id: -1 })
           .limit(limit)
           .toArray()
       : this.collection
-          .find({ method: "post" })
+          .find({
+            method: "post",
+            ...(hashtag && { hashtags: new RegExp(hashtag) }),
+          })
           .sort({ _id: -1 })
           .limit(limit)
           .toArray());
@@ -40,8 +48,9 @@ class Letter extends MongoDataSource {
     const length =
       currentCursor !== cursor
         ? await this.collection.countDocuments({
-            method: "post",
             _id: { $lt: ObjectId(currentCursor) },
+            method: "post",
+            ...(hashtag && { hashtags: new RegExp(hashtag) }),
           })
         : 0;
 
@@ -49,6 +58,7 @@ class Letter extends MongoDataSource {
       cursor: currentCursor,
       limit,
       hasMore: length > 0,
+      hashtag,
       letters: letters.map((letter) => this.letterReducer(letter)),
     };
   }
@@ -85,11 +95,15 @@ class Letter extends MongoDataSource {
     const read = method === "paper_plane" ? false : null;
     const content = preSliceContent.slice(0, 250);
     const writer = preSliceWriter.slice(0, 25);
+    const hashtags = Array.from(
+      new Set(content.match(/(?<=( |^))#(.*?)(?=( |$))/g) || [])
+    );
 
     const { insertedId } = await this.collection.insertOne({
       content,
       writer,
       date,
+      hashtags,
       method,
       read,
     });
@@ -99,13 +113,14 @@ class Letter extends MongoDataSource {
       content,
       writer,
       date,
+      hashtags,
       method,
       read,
     };
   }
 
-  letterReducer({ content, writer, _id, date, method, read }) {
-    return { id: _id, content, writer, date, method, read };
+  letterReducer({ content, writer, _id, date, hashtags, method, read }) {
+    return { id: _id, content, writer, date, hashtags, method, read };
   }
 }
 

@@ -3,8 +3,8 @@ const resolvers = {
     // getLetters: (_, { offset, limit }, { dataSources }) => {
     //   return dataSources.Letter.getLetters(offset, limit);
     // },
-    getLetters: (_, { cursor, limit }, { dataSources }) => {
-      return dataSources.Letter.getLetters(cursor, limit);
+    getLetters: (_, { cursor, limit, hashtag }, { dataSources }) => {
+      return dataSources.Letter.getLetters(cursor, limit, hashtag);
     },
     getLetter: (_, { id }, { dataSources }) => {
       return dataSources.Letter.getLetter(id);

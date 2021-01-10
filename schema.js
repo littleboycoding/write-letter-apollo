@@ -2,7 +2,7 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-    getLetters(cursor: ID, limit: Int = 10): Letters!
+    getLetters(cursor: ID, limit: Int = 10, hashtag: String): Letters!
     getLetter(id: ID!): Letter!
     getPaperPlane: Letter!
   }
@@ -27,6 +27,7 @@ const typeDefs = gql`
     cursor: ID
     limit: Int!
     hasMore: Boolean!
+    hashtag: String
     letters: [Letter!]!
   }
 
@@ -35,6 +36,7 @@ const typeDefs = gql`
     content: String!
     writer: String!
     date: Float!
+    hashtags: [String!]!
     method: String!
     read: Boolean
     getComments(cursor: ID, limit: Int = 5): Comments!
