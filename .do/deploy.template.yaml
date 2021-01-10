@@ -1,14 +1,22 @@
 spec:
  name: write-letter
+ static_sites:
+   - git:
+     branch: master
+     repo_clone_url: https://github.com/littleboycoding/write-letter.git
+     name: write-letter
+     envs:
+       - key: APOLLO_URL
+         scope: BUILD_TIME
  services:
- - name: web
-   git:
+   - name: web
+     git:
      branch: main
      repo_clone_url: https://github.com/littleboycoding/write-letter-apollo.git
-   envs:
-   - key: PORT
-     value: "8000"
-   - key: NODE_ENV
-     value: "production"
-   - key: MONGO_ADDRESS
-     type: SECRET
+     envs:
+       - key: PORT
+         value: "8000"
+       - key: NODE_ENV
+         value: "production"
+       - key: MONGO_ADDRESS
+         type: SECRET
